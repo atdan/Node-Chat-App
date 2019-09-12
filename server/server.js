@@ -20,7 +20,14 @@ io.on(`connection`, (socket) => {
 
     //event listener
     socket.on('createMessage', (message)=> {
-        console.log(message)
+        console.log(message);
+
+        //io.emit emits an event to every single connection
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        })
     });
 
     socket.on(`disconnect` , () => {
@@ -28,11 +35,12 @@ io.on(`connection`, (socket) => {
     });
 
     //emmitter
-    socket.emit(`newMessage`,{
-        from: 'atuma',
-        text: 'Hi, from daniel',
-        createdAt: 2332
-    });
+    //socket.emit emits a new event to a single connection
+    // socket.emit(`newMessage`,{
+    //     from: 'atuma',
+    //     text: 'Hi, from daniel',
+    //     createdAt: 2332
+    // });
 
 
 });
@@ -40,3 +48,4 @@ io.on(`connection`, (socket) => {
 server.listen(port, () => {
     console.log(`server started on port ${port}`)
 });
+

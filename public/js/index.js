@@ -3,10 +3,11 @@ var socket = io();//initiating a request from the client to the server to open u
 socket.on('connect', function ()  {
     console.log(`connected to server`);
 
-    socket.emit(`createMessage`, {
-        from: 'Atuma',
-        text: 'Yep it works'
-    })
+    // socket.emit(`createMessage`, {
+    //     from: 'Atuma',
+    //     text: 'Yep it works'
+    // })
+
 });
 
 socket.on('disconnect',function () {
