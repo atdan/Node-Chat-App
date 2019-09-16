@@ -3,6 +3,8 @@ const http = require('http');//in Built node module
 const express = require(`express`);
 const socketIO = require("socket.io");
 
+const {generateMessage} = require(`./utils/message`)
+
 const publicPath = path.join(__dirname, "../public");
 const port = process.env.PORT || 3000;
 
@@ -19,30 +21,19 @@ io.on(`connection`, (socket) => {
 
     //socket.emit from admin, text: weqlcome to the chat app
     //greet the eindividual user
-    socket.emit('newMessage', {
-        from: 'Admin',
-        text: 'Welcome to the chat app',
-        createdAt: new Date().getTime()
-    })
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat App'))
  
     //socke .broadcat.emit tp inform everyone else qthat a new user joined
-    socket.broadcast.emit('newMessage', {
-        from: 'Admin',
-        text: 'New User Joined',
-        createdAt: new Date().getTime()
-    })
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User Joined'))
     
 
     //event listener
     socket.on('createMessage', (message)=> {
         console.log(message);
 
-        //io.emit emits an event to every single connection
-        // io.emit('newMessage', {
-        //     from: message.from,
-        //     text: message.text,
-        //     createdAt: new Date().getTime()
-        // })
+        // io.emit emits an event to every single connection
+        io.emit('newMessage', generateMessage(message.from, message
+            .text))
 
         //send the event to everybody but this socket
         // socket.broadcast.emit('newMessage', {
