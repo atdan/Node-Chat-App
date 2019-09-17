@@ -28,12 +28,13 @@ io.on(`connection`, (socket) => {
     
 
     //event listener
-    socket.on('createMessage', (message)=> {
+    socket.on('createMessage', (message, callback)=> {
         console.log(message);
-
+ 
         // io.emit emits an event to every single connection
-        io.emit('newMessage', generateMessage(message.from, message
-            .text))
+        io.emit('newMessage', generateMessage(message.from, message.text))
+
+        callback('This is from the server');
 
         //send the event to everybody but this socket
         // socket.broadcast.emit('newMessage', {
