@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <meta name="viewport" content="width=device-width, 
+    <meta name="viewport" content="width=device-width,
             initial-scale=1, user-scalable=no">
-       
+
     <link rel="stylesheet" href="/css/styles.css">
 
 </head>
@@ -26,19 +26,19 @@
 
         <div >
             <form id="message-form">
-            
-                <input name="message" type="text" placeholder="Type message" 
+
+                <input name="message" type="text" placeholder="Type message"
                     autofocus  autocomplete="off"/>
                 <button>Send</button>
-            
+
                 <button id="send-location">Send Location</button>
             </form>
-            
+
         </div>
 
     </div>
 
-    <script id="message-template" type="text/template"> 
+    <script id="message-template" type="text/template">
        <li class="message">
         <div class="message__title">
             <h4>{{from}}</h4>
@@ -49,8 +49,8 @@
         </div>
     </li>
     </script>
-   
-    <script id="location-message-template" type="text/template"> 
+
+    <script id="location-message-template" type="text/template">
        <li class="message">
         <div class="message__title">
             <h4>{{from}}</h4>
@@ -66,9 +66,10 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/jquery-3.4.1.min.js"></script>
-    <script src="js/chat.js"></script>
-    <script src="js/libs//moment.js"></script>
-    <script src="js/libs//mustache.js"></script>
+    <script src="/js/chat.js"></script>
+    <script src="/js/libs/deparam.js"></script>
+    <script src="/js/libs//moment.js"></script>
+    <script src="/js/libs//mustache.js"></script>
 
 </body>
 

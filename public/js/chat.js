@@ -1,5 +1,5 @@
 
-var socket = io();//initiating a request from the 
+var socket = io();//initiating a request from the
 //client to the server to open up a web socket and keep it open
 
 function scrollToButtom (){
@@ -15,7 +15,7 @@ function scrollToButtom (){
 
     if(clientHeight + scrollTop +
          newMessageHeight + lastMessageHeight >= scrollHeight){
-        
+
             messages.scrollTop(scrollHeight);
     }
 
@@ -24,7 +24,16 @@ function scrollToButtom (){
 
 socket.on('connect', function ()  {
     console.log(`connected to server`);
+    var params = jQuery.deparam(window.location.search)
 
+    socket.emit('join', params, function (err) {
+        if (err){
+            alert(err);
+            window.location.href = "/"
+        }else {
+            console.log('No Error')
+        }
+    })
     // socket.emit(`createMessage`, {
     //     from: 'Atuma',
     //     text: 'Yep it works'
@@ -35,6 +44,18 @@ socket.on('connect', function ()  {
 socket.on('disconnect',function () {
 
     console.log(`Disconnected from server`);
+});
+
+socket.on('updateUserList', function (users) {
+    console.log('Users List: ', users);
+    var ol = jQuery('<ol></ol>')
+
+    users.forEach(function (user) {
+        ol.append(jQuery('<li></li>').text(user))
+    });
+
+    jQuery('#users').html(ol);
+
 });
 
 socket.on('newLocationMessage', function(message) {
@@ -49,11 +70,11 @@ socket.on('newLocationMessage', function(message) {
 
     // console.log(li);
 
-    var formatedTime = moment(message.createdAt).format('h:mm a')   
+    var formatedTime = moment(message.createdAt).format('h:mm a')
 
     var template = jQuery('#location-message-template').html();
     var html = Mustache.render(template, {
-        from: message.from, 
+        from: message.from,
         url: message.url,
         createdAt: formatedTime
     });
