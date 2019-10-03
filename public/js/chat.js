@@ -66,7 +66,7 @@ socket.on('newLocationMessage', function(message) {
     // li.text(`${message.from} ${formatedTime}: `);
     // a.attr('href', message.url);
     // li.append(a);
-    // jQuery(`#messages`).append(li);
+    // jQuery(`#messages`).append(li);v
 
     // console.log(li);
 
@@ -147,7 +147,7 @@ jQuery('#message-form').on('submit', function (e) {
 
     var messageTextBox = jQuery('[name=message]');
     socket.emit('createMessage', {
-        from: 'User',
+
         text: messageTextBox.val()
     }, function() {
 
